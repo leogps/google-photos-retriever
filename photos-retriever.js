@@ -11,7 +11,7 @@ var os = require('os');
 //var https = require('https');
 //const { URL } = require('url');
 //var uuidv4 = require('uuid/v4');
-os.homedir() 
+
 
 var FILES = [];
 var RESULTS_PER_REQUEST = 1000;
@@ -19,8 +19,7 @@ var RESULTS_PER_REQUEST = 1000;
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/drive-nodejs-photo-retriever.json
 var SCOPES = ['https://www.googleapis.com/auth/drive.photos.readonly'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_DIR = os.homedir() + '/.credentials/';
 var TOKEN_PATH = TOKEN_DIR + 'drive-nodejs-photo-retriever.json';
 
 // Load client secrets from a local file. It is expected to be at the root of homedir.
