@@ -2,7 +2,7 @@
 Downloads photos from Google Photos (Picasa)/Google Drive
 
 ## Prerequisite
-Need to enable Drive API for a Google Account and register a Client Application at [console.google.com](console.google.com)
+Need to enable Drive API for a Google Account and register a Client Application at [console.cloud.google.com](https://console.cloud.google.com)
 ### Turn on the Drive API
 1. Use this [wizard](https://console.developers.google.com/start/api?id=drive) to create or select a project in the Google Developers Console and automatically turn on the API. Click Continue, then Go to credentials.
 2. On the Add credentials to your project page, click the Cancel button. 
