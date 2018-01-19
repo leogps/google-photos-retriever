@@ -135,17 +135,28 @@ function downloadFile(auth, FILES, index) {
     return;
   }
 
+  console.log(file.createdDate);
+  var createdDate = new Date(file.createdDate);
+  var thatDay = createdDate.getFullYear() + "-" + createdDate.getMonth() + "-" + createdDate.getUTCDate();
+  console.log(thatDay);
+
+  // Create Directory if doesn't exist.
+  if (!fs.existsSync(thatDay)){
+    fs.mkdirSync(thatDay);
+  }
+
   var filename = file.id + "_" + file.title;
-  if(fs.existsSync(filename)) {
-    console.log("File Already exits: " + filename);
+  var filePath = thatDay + "/" + filename;
+  if(fs.existsSync(filePath)) {
+    console.log("File Already exits: " + filePath);
     downloadFile(auth, FILES, ++index); 
     return;
   }
 
   var downloadUrl = file.downloadUrl;  
-  console.log("Dowloading... " + filename + " from " + downloadUrl);
+  console.log("Dowloading... " + filePath + " from " + downloadUrl);
   var fileId = file.id;
-  var dest = fs.createWriteStream(filename);
+  var dest = fs.createWriteStream(filePath);
   var service = google.drive('v2');
   service.files.get({
     auth: auth,
@@ -153,11 +164,11 @@ function downloadFile(auth, FILES, index) {
     alt: 'media'
   })
   .on('end', function () {
-    console.log('Finished downloading: ' + filename);
+    console.log('Finished downloading: ' + filePath);
     downloadFile(auth, FILES, ++index);
   })
   .on('error', function (err) {
-    console.log('Error during download: ' + filename, err);
+    console.log('Error during download: ' + filePath, err);
     downloadFile(auth, FILES, ++index);
   })
   .pipe(dest);
